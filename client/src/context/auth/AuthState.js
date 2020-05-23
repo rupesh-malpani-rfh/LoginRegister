@@ -6,7 +6,8 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
 } from '../types';
 
 const AuthState = (props) => {
@@ -64,12 +65,21 @@ const AuthState = (props) => {
             });
         }
     }
+
+    // Logout
+    const logout = () => {
+        dispatch({
+            type: LOGOUT
+        });
+    }
+
     return (
         <AuthContext.Provider value={{
             token: state.token,
             error: state.error,
             register,
-            loginUser
+            loginUser,
+            logout
         }}>
             {props.children}
         </AuthContext.Provider>
