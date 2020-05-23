@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import AuthState from './context/auth/AuthState';
 import ProfileState from './context/profile/ProfileState';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/logout" component={Logout} />
             </div>
           </div>
         </Router>
