@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../context/auth/authContext';
 
 const Navbar = (props) => {
+    const authContext = useContext(AuthContext);
+    const { logout } = authContext;
+
     const logOut = e => {
-        e.preventDefault()
-        localStorage.removeItem('token')
-        props.history.push('/')
+        e.preventDefault();
+        logout();
+        props.history.push('/logout')
     }
+
+    const loginRegLink = (
+        <Fragment>
+            <li>
+                <Link to="/login">
+                    Login
+              </Link>
+            </li>
+            <li>
+                <Link to="/register">
+                    Register
+              </Link>
+            </li>
+        </Fragment>
+    );
+
+    const userLink = (
+        <Fragment>
+            <li>
+                <Link to="/user">
+                    User
+              </Link>
+            </li>
+            <li>
+
+                <Link to="/logout" onClick={logOut} className="nav-link">
+                    Logout</Link>
+
+            </li>
+        </Fragment>
+    );
+
     return (
         <nav className="navbar">
 
@@ -16,27 +52,8 @@ const Navbar = (props) => {
                         Home
               </Link>
                 </li>
-                <li>
-                    <Link to="/login">
-                        Login
-              </Link>
-                </li>
-                <li>
-                    <Link to="/register">
-                        Register
-              </Link>
-                </li>
-                <li>
-                    <Link to="/user">
-                        User
-              </Link>
-                </li>
-                <li>
+                {localStorage.token ? userLink : loginRegLink}
 
-                    <a href="" onClick={logOut} className="nav-link">
-                        Logout</a>
-
-                </li>
             </ul>
 
         </nav>
