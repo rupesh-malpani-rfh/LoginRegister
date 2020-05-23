@@ -2,7 +2,8 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
 } from '../types';
 
 export default (state, action) => {
@@ -32,6 +33,12 @@ export default (state, action) => {
                 ...state,
                 token: null,
                 error: action.payload
+            };
+        case LOGOUT:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                token: null
             };
         default:
             return state;
